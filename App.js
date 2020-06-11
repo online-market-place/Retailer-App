@@ -1,30 +1,56 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import {View, Text, SafeAreaView} from 'react-native';
+import {View, Text, SafeAreaView, Button} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
 import Login from './src/screens/Login';
 import SignUp from './src/screens/SignUp';
 import Home from './src/screens/Home';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-const Stack = createStackNavigator();
+import {createStackNavigator} from '@react-navigation/stack';
+const HomeScreen = createStackNavigator();
+
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import Profile from './src/screens/Profile';
+const Drawer = createDrawerNavigator();
+
+const HomeStackScreen = ({navigation}) => {
+  return (
+    <HomeScreen.Navigator>
+      <HomeScreen.Screen
+        name="Eline"
+        component={Home}
+        options={{
+          headerStyle: {
+            backgroundColor: '#009387',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+          headerLeft: () => (
+            <Icon.Button
+              name="ios-menu"
+              size={25}
+              backgroundColor="#009387"
+              onPress={() => navigation.openDrawer()}
+            />
+          ),
+        }}
+      />
+    </HomeScreen.Navigator>
+  );
+};
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="LOGIN"
-          component={Login}
-          options={{title: 'Welcome'}}
-        />
-        <Stack.Screen
-          name="SignUp"
-          component={SignUp}
-          options={{title: 'Sign Up'}}
-        />
-        <Stack.Screen name="Home" component={Home} options={{title: 'Eline'}} />
-      </Stack.Navigator>
+      <Drawer.Navigator>
+        <Drawer.Screen name="Home" component={HomeStackScreen} />
+        <Drawer.Screen name="Login" component={Login} />
+        <Drawer.Screen name="SignUp" component={SignUp} />
+        <Drawer.Screen name="Profile" component={Profile} />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 };
