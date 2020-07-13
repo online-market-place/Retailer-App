@@ -1,11 +1,17 @@
 import React from 'react';
-import {StyleSheet, Text, View, SafeAreaView} from 'react-native';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-const Drawer = createDrawerNavigator();
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  ScrollView,
+  Image,
+} from 'react-native';
+import CameraRoll from '@react-native-community/cameraroll';
 
-import Login from './Login';
-import SignUp from './SignUp';
-import Profile from './Profile';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+import axios from 'axios';
 
 const Home = () => {
   return (
@@ -16,5 +22,3 @@ const Home = () => {
 };
 
 export default Home;
-
-const styles = StyleSheet.create({});
